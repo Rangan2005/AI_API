@@ -59,7 +59,7 @@ async def summarize_text_endpoint(payload: dict = Body(...)):
 # -----------------------------------------------------------------------------
 # 5. Todo List Endpoints
 # -----------------------------------------------------------------------------
-@app.get("/todo/")
+@app.post("/todo/")
 async def manage_todo_endpoint():
     """
     Returns the current todo list.

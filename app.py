@@ -1,11 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException, Body
-import requests
+from fastapi import FastAPI, HTTPException, Body
 import uvicorn
-import os
-import whisper
-# Import your local feature functions from VS Code files
 from Main_points import extract_main_points
 from Meeting_report import generate_meeting_report
+from To_do_list import manage_todo_list
 from summariser import summarise_transcript
 # from todo_list import get_todo_list, add_todo, delete_todo
 
@@ -62,37 +59,13 @@ async def summarize_text_endpoint(payload: dict = Body(...)):
 # -----------------------------------------------------------------------------
 # 5. Todo List Endpoints
 # -----------------------------------------------------------------------------
-# @app.get("/todo/")
-# async def get_todo_endpoint():
-#     """
-#     Returns the current todo list.
-#     """
-#     todos = get_todo_list()
-#     return {"todo_list": todos}
-
-# @app.post("/todo/")
-# async def add_todo_endpoint(payload: dict = Body(...)):
-#     """
-#     Accepts a JSON body with a 'task' field and adds it to the todo list.
-#     """
-#     task = payload.get("task", "")
-#     if not task:
-#         raise HTTPException(status_code=400, detail="Task is required")
-    
-#     add_todo(task)
-#     return {"message": "Task added successfully"}
-
-# @app.delete("/todo/")
-# async def delete_todo_endpoint(payload: dict = Body(...)):
-#     """
-#     Accepts a JSON body with a 'task' field and removes it from the todo list.
-#     """
-#     task = payload.get("task", "")
-#     if not task:
-#         raise HTTPException(status_code=400, detail="Task is required")
-    
-#     delete_todo(task)
-#     return {"message": "Task deleted successfully"}
+@app.get("/todo/")
+async def manage_todo_endpoint():
+    """
+    Returns the current todo list.
+    """
+    todos = manage_todo_list()
+    return {"todo_list": todos}
 
 # -----------------------------------------------------------------------------
 # Run the FastAPI application (for VS Code or production server)
